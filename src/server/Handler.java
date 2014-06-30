@@ -8,38 +8,38 @@ package server;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.logging.Logger;
 
 class Handler implements HttpHandler
 {
 
     @Override
-    public void handle(HttpExchange exchange) throws IOException
+    public void handle(HttpExchange exchange)
     {
-	String requestMethod = exchange.getRequestMethod();
-	if (requestMethod.equalsIgnoreCase("GET"))
+	String response = "";
+	String requestMethod = exchange.getRequestMethod().toUpperCase();
+	
+	switch (requestMethod)
 	{
-	    Headers responseHeaders = exchange.getResponseHeaders();
-	    responseHeaders.set("Content-Type", "text/plain");
+	    case "GET":
+		
+		break;
+	    case "POST":
+		break;
+	}
+	
+	Headers responseHeaders = exchange.getResponseHeaders();
+	responseHeaders.set("Content-Type", "application/json");
+	
+	try (OutputStream responseBody = exchange.getResponseBody())
+	{
 	    exchange.sendResponseHeaders(200, 0);
-
-	    try (OutputStream responseBody = exchange.getResponseBody())
-	    {
-		Headers requestHeaders = exchange.getRequestHeaders();
-		Set<String> keySet = requestHeaders.keySet();
-		Iterator<String> iter = keySet.iterator();
-		while (iter.hasNext())
-		{
-		    String key = iter.next();
-		    List values = requestHeaders.get(key);
-		    String s = key + " = " + values.toString() + "\n";
-		    responseBody.write(s.getBytes());
-		}
-	    }
+	    responseBody.write(response.getBytes());
+	}
+	catch (Exception ex)
+	{
+	    Logger.getLogger("Server").info(ex.getMessage());
 	}
     }
 }

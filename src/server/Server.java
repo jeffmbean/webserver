@@ -14,6 +14,7 @@ public class Server
 {
     private static final int PORT = 8080;
     private static final String HOSTNAME = "127.0.0.1";
+    private static final int NUM_OF_THREADS = 10;
     
     /**
      * 
@@ -24,7 +25,7 @@ public class Server
     {
 	InetSocketAddress socket = new InetSocketAddress(HOSTNAME, PORT);
 	HttpServer server = HttpServer.create(socket, 0);
-	server.setExecutor(Executors.newCachedThreadPool());
+	server.setExecutor(Executors.newFixedThreadPool(NUM_OF_THREADS));
 	server.createContext("/", new Handler());
 	server.start();
     }
