@@ -1,0 +1,44 @@
+{
+    "controls": {
+	"thermostat": {
+	    "cool": {
+		"id": "1",
+		"status": "true",
+		"temperature": "76"
+	    },
+	    "heat": {
+		"id": "2",
+		"status": "false",
+		"temperature": "68"
+	    }
+	},
+	"lighting": {
+	    "kitchen": {
+		"id": "3",
+		"status": "true"		
+	    },
+	    "family room": {
+		"id": "4",
+		"status": "true"		
+	    },
+	    "porch": {
+		"id": "5",
+		"status": "false"		
+	    }
+	},
+	"security": {
+	    "front door": {
+		"id": "6",
+		"status": "false"		
+	    },
+	    "back door": {
+		"id": "7",
+		"status": "true"		
+	    },
+	    "windows": {
+		"id": "8",
+		"status": "false"		
+	    }
+	}
+    }
+}

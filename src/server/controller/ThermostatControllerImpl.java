@@ -6,45 +6,61 @@
 
 package server.controller;
 
+import java.util.*;
 import server.model.Device;
+import server.service.ThermostatService;
 
 /**
  *
  * @author Jeff Bean
  */
 public class ThermostatControllerImpl implements DeviceController
-{
-    private Device ac;
-    private Device furnace;
-    private Integer temperature;
+{  
+    private static final ThermostatControllerImpl INSTANCE = new ThermostatControllerImpl();
     
+    private ThermostatService service;
     
 
-    @Override
-    public String getValue()
+    private ThermostatControllerImpl()
     {
-	return temperature.toString();
+	this.service = new ThermostatService();
+    }
+    
+    public static ThermostatControllerImpl getInstance()
+    {
+	return INSTANCE;
     }
 
     @Override
-    public boolean update(String property, String value)
+    public String getStatus()
     {
-	boolean success = false;
+	return service.getStatus();
+    }
+
+    @Override
+    public String update(Map<String,List<String>> parameters)
+    {
+	String json = "{\"success\":\"false\"}";
+	String action = "";
 	
-	switch (property)
+	if (parameters.containsKey("action"))
 	{
-	    case "ac":
-		success = true;
+	    action = parameters.get("action").get(0);
+	}
+	
+	switch (action)
+	{
+	    case "turnOn":
 		break;
-	    case "furnace":
-		success = true;
+	    case "turnOff":
 		break;
-	    case "off":
-		success = true;
+	    case "increaseTemp":
+		break;
+	    case "decreaseTemp":
 		break;
 	}
 	
-	return success;
+	return json;
     }
     
 }

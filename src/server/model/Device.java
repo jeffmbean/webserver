@@ -6,14 +6,42 @@
 
 package server.model;
 
+import java.math.BigDecimal;
+import javax.json.Json;
+import javax.json.JsonObjectBuilder;
+
 /**
  *
  * @author Jeff Bean
  */
-public abstract class Device
+public class Device
 {
+    private String id;
     private String name;
-    private String value;
+    private int status;
+
+    /**
+     * Constructor.
+     * @param id
+     * @param name
+     * @param status 
+     */
+    public Device(String id, String name, int status)
+    {
+	this.id = id;
+	this.name = name;
+	this.status = status;
+    }
+
+    public String getId()
+    {
+	return id;
+    }
+
+    public void setId(String id)
+    {
+	this.id = id;
+    }
 
     public String getName()
     {
@@ -25,13 +53,26 @@ public abstract class Device
 	this.name = name;
     }
 
-    public String getValue()
+    public int getStatus()
     {
-	return value;
+	return status;
     }
 
-    public void setValue(String value)
+    public void setStatus(int status)
     {
-	this.value = value;
+	this.status = status;
+    }
+
+    public String toJSON()
+    {
+	StringBuilder json = new StringBuilder("{");
+	json.append("\"id\":\"");
+	json.append(id);
+	json.append("\", \"name\":\"");
+	json.append(name);
+	json.append("\", \"status\":");
+	json.append(status);
+	json.append("}");
+	return json.toString();
     }
 }

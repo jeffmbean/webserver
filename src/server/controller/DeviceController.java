@@ -6,12 +6,15 @@
 
 package server.controller;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  *
  * @author Jeff_2
  */
 public interface DeviceController
 {
-    public String getValue();
-    public boolean update(String property, String value);
+    public String getStatus();
+    public String update(Map<String,List<String>> parameters);
 }
