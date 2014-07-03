@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<title>MyHome inTouch</title>
+	
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Cookie">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>	
+        <script type="text/javascript" src="js/main.js"></script>
+    </head>
+    <body>	
+        <div class="navBar">
+	    <input type="hidden" id="selected_page" value="thermostat">
+	    <div class="category selected" id="thermostat" onclick="loadCategory(this)">
+		<img src="images/thermostat.png" alt="Thermostat" id="thermostat_img">
+		<div class="label">Climate</div>
+	    </div>
+	    <div class="category" id="lighting" onclick="loadCategory(this)">
+		<img src="images/light.png" alt="Lighting" id="lighting_img">
+		<div class="label">Lights</div>
+	    </div>
+	    <div class="category" id="security" onclick="loadCategory(this)">
+		<img src="images/locked.png" alt="Security" id="security_img">
+		<div class="label">Security</div>
+	    </div>
+        </div>
+	<div class="content" id="content">
+	</div>
+	<div class="clearboth"></div>
+	<div class="footer">
+	    <span>Design by: 
+		<span class="handwritten">
+		    Jeff M Bean
+		</span>
+	    </span>
+        </div>
+    </body>
+</html>

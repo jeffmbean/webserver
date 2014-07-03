@@ -1,0 +1,37 @@
+/* 
+    Created on : Jun 21, 2014
+    Author     : Jeff Bean
+*/
+
+
+.controller {
+    background-color: #455064;
+    box-shadow: 4px 4px 0px #2D2F34;
+    border-radius: 5px;
+    height: 165px;
+    width: 450px;;
+    max-width: 600px;
+    padding: 20px;
+}
+.onOffControls {
+    float: left;    
+}
+.temperature {
+    float: left;
+    margin: 15px;
+    padding: 10px 20px;
+    font-size: 100px;
+}
+#tempDisplay {
+    float: left;
+    width: 120px;
+}
+
+.temperatureControls {
+    float: left;
+    width: 50px;
+    padding: 15px 5px;
+}
+.temperatureControls img {
+    cursor: pointer;
+}

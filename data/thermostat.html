@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<link rel="stylesheet" type="text/css" href="css/thermostat.css">
+<script type="text/javascript" src="js/thermostat.js"></script>
+
+<div class="controller">
+    <div class="onOffControls">
+	<button id="cool" onclick="turnACOn()">Cool</button><br/>
+	<button id="heat" onclick="turnFurnaceOn()">Heat</button><br/>
+	<button id="off" class="selected" onclick="turnOff()">Off</button>
+    </div>   
+    <div class="temperature">
+	<input type="hidden" id="currentTemp" value="75">
+	<div id="tempDisplay">75</div>&deg;
+    </div>
+    <div class="temperatureControls">
+	<img src="images/arrow_red.png" alt="Up" onclick="increaseTemp()">
+	<img src="images/arrow_blue.png" alt="Down" onclick="decreaseTemp()">
+    </div>
+</div>

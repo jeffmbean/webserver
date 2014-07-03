@@ -1,0 +1,32 @@
+/* 
+    Created on : Jun 21, 2014
+    Author     : Jeff Bean
+*/
+
+
+.controller {
+    background-color: #455064;
+    box-shadow: 4px 4px 0px #2D2F34;
+    border-radius: 5px;
+    max-width: 400px;
+    padding: 10px;
+}
+
+.zone {
+    display: inline-block; 
+    vertical-align:middle;
+}
+.zone div {
+    font-size: 24px;
+    font-weight: bold;
+    min-width: 200px;
+}
+.zone img {
+    display: inline-block; 
+    vertical-align:middle;
+    padding: 0px 15px;
+    width: 60px;
+    max-width: 80%;
+    height: auto;
+    cursor: pointer;
+}

@@ -16,36 +16,42 @@ import java.nio.file.Paths;
 
 class Handler implements HttpHandler
 {
-	private static final String FILE_PATH = "data/";
+    private static final String FILE_PATH = "data/";
 	
+    /**
+     * This function extracts the file path from the URL. It then opens and returns
+     * it as the response. It sends the contents as plain text as the AJAX call 
+     * or browser will determine whether HTML or JSON is being returned.
+     * @param exchange 
+     */
     @Override
     public void handle(HttpExchange exchange)
     {
-		Path path = Paths.get(FILE_PATH + exchange.getRequestURI().getPath());
-		byte[] response;
-		
-		try
-		{
-			response = Files.readAllBytes(path);
-		}
-		catch (IOException ex)
-		{
-			response = new byte[1];
-			System.err.println("Error reading file: "+ path.toString());
-		}
-		
+	Path path = Paths.get(FILE_PATH + exchange.getRequestURI().getPath());
+	byte[] response;
 
-		Headers responseHeaders = exchange.getResponseHeaders();
-		responseHeaders.set("Content-Type", "application/json");
+	try
+	{
+		response = Files.readAllBytes(path);
+	}
+	catch (IOException ex)
+	{
+		response = new byte[1];
+		System.err.println("Error reading file: "+ path.toString());
+	}
 
-		try (OutputStream responseBody = exchange.getResponseBody())
-		{
-			exchange.sendResponseHeaders(200, 0);
-			responseBody.write(response);
-		}
-		catch (Exception ex)
-		{
-			System.err.println("Error writing file: "+ path.toString());
-		}
+
+	Headers responseHeaders = exchange.getResponseHeaders();
+	responseHeaders.set("Content-Type", "text/html");
+
+	try (OutputStream responseBody = exchange.getResponseBody())
+	{
+		exchange.sendResponseHeaders(200, 0);
+		responseBody.write(response);
+	}
+	catch (Exception ex)
+	{
+		System.err.println("Error writing file: "+ path.toString());
+	}
     }
 }
