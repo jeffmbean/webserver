@@ -16,7 +16,7 @@ import java.nio.file.Paths;
 
 class Handler implements HttpHandler
 {
-	private static final String FILE_PATH = "";
+	private static final String FILE_PATH = "data/";
 	
     @Override
     public void handle(HttpExchange exchange)
