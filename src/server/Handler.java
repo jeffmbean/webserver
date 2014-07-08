@@ -17,6 +17,7 @@ class Handler implements HttpHandler
 {
 
     private static final String FILE_PATH = "data/";
+    private static final String WELCOME_FILE = "main.html";
 
     /**
      * This function extracts the file path from the URL. It then opens and
@@ -31,7 +32,14 @@ class Handler implements HttpHandler
 
 	if (null != requestMethod && "GET".equals(requestMethod))
 	{
-	    Path path = Paths.get(FILE_PATH + exchange.getRequestURI().getPath());
+	    String requestedPath = exchange.getRequestURI().getPath();
+	    
+	    if ("/".equals(requestedPath))
+	    {
+		requestedPath = WELCOME_FILE;
+	    }
+	    
+	    Path path = Paths.get(FILE_PATH + requestedPath);
 
 	    try (OutputStream responseBody = exchange.getResponseBody())
 	    {

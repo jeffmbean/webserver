@@ -11,7 +11,7 @@
  */
 $.ajaxSetup({
 	url: "/thermostat/control",
-	type: "POST",
+	type: "GET",
 	dataType: "JSON"
 });
 
