@@ -5,7 +5,6 @@
  */
 package server;
 
-import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
@@ -16,42 +15,45 @@ import java.nio.file.Paths;
 
 class Handler implements HttpHandler
 {
+
     private static final String FILE_PATH = "data/";
-	
+
     /**
-     * This function extracts the file path from the URL. It then opens and returns
-     * it as the response. It sends the contents as plain text as the AJAX call 
-     * or browser will determine whether HTML or JSON is being returned.
-     * @param exchange 
+     * This function extracts the file path from the URL. It then opens and
+     * returns it as the response. It sends the contents of the and lets the AJAX
+     * call or browser determine how to render the content that is returned.
+     * @param exchange
      */
     @Override
     public void handle(HttpExchange exchange)
     {
-	Path path = Paths.get(FILE_PATH + exchange.getRequestURI().getPath());
-	byte[] response;
+	String requestMethod = exchange.getRequestMethod().toUpperCase();
 
-	try
+	if (null != requestMethod && "GET".equals(requestMethod))
 	{
-		response = Files.readAllBytes(path);
-	}
-	catch (IOException ex)
-	{
-		response = new byte[1];
-		System.err.println("Error reading file: "+ path.toString());
-	}
+	    Path path = Paths.get(FILE_PATH + exchange.getRequestURI().getPath());
 
-
-	Headers responseHeaders = exchange.getResponseHeaders();
-	responseHeaders.set("Content-Type", "text/html");
-
-	try (OutputStream responseBody = exchange.getResponseBody())
-	{
+	    try (OutputStream responseBody = exchange.getResponseBody())
+	    {
+		byte[] response = Files.readAllBytes(path);
 		exchange.sendResponseHeaders(200, 0);
 		responseBody.write(response);
+	    }
+	    catch (IOException ex)
+	    {
+		System.err.println("Page Not Found");
+	    }
 	}
-	catch (Exception ex)
+	else
 	{
-		System.err.println("Error writing file: "+ path.toString());
+	    try
+	    {
+		exchange.sendResponseHeaders(404, 0);
+	    }
+	    catch (IOException ex)
+	    {
+		System.err.println("Page Not Found");
+	    }
 	}
     }
 }
