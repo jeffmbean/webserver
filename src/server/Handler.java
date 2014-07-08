@@ -34,7 +34,7 @@ class Handler implements HttpHandler
 	{
 	    String requestedPath = exchange.getRequestURI().getPath();
 	    
-	    if ("/".equals(requestedPath))
+	    if (requestedPath.isEmpty() || "/".equals(requestedPath))
 	    {
 		requestedPath = WELCOME_FILE;
 	    }
